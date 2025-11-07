@@ -1,6 +1,6 @@
 # HackUMass-Worshop
 Build and deploy your first project on the AWS Free Tier
-# Quote of the Day — Serverless on AWS (Free Tier)
+# Quote of the Day - Serverless on AWS (Free Tier)
 
 A minimal, beginner-friendly **serverless** app:
 - **DynamoDB** stores quotes
@@ -8,7 +8,6 @@ A minimal, beginner-friendly **serverless** app:
 - **API Gateway** exposes a `/quote` endpoint
 - **S3** hosts a tiny web page
 
-Perfect for hackathons and workshops.
 
 ## Architecture
 S3 (front-end) → API Gateway (waiter) → Lambda (chef) → DynamoDB (kitchen)

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quote of the Day</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; margin:0; background:#f8fafc; }
+    .card { background:white; padding:24px 28px; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,0.08); max-width:560px; text-align:center; }
+    h2 { margin:0 0 10px; }
+    #quote { font-size:1.25rem; line-height:1.6; margin:14px 0 18px; }
+    button { padding:10px 16px; border-radius:10px; border:none; cursor:pointer; font-weight:600; background:#ff9900; color:#111; }
+    button:disabled { opacity:0.6; cursor:not-allowed; }
+    footer { margin-top:18px; font-size:12px; color:#6b7280; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Quote of the Day 💬 </h2>
+    <div id="quote">Loading…</div>
+    <button id="btn">New Quote</button>
+    <footer>Powered by AWS Free Tier: S3 + API Gateway + Lambda + DynamoDB</footer>
+  </div>
+  <script>
+    const API = "YOUR_API_GATEWAY_INVOKE_URL/quote"; // e.g., https://abc123.execute-api.us-east-1.amazonaws.com/quote
+    const quoteEl = document.getElementById("quote");
+    const btn = document.getElementById("btn");
+
+    async function loadQuote() {
+      try {
+        btn.disabled = true;
+        quoteEl.textContent = "Fetching…";
+        const res = await fetch(API, { headers: { "Accept": "application/json" } });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        quoteEl.textContent = data.quote || "(no quote)";
+      } catch (err) {
+        quoteEl.textContent = "Oops! Couldn’t load quote. Check CORS & API.";
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+    btn.addEventListener("click", loadQuote);
+    loadQuote();
+  </script>
+</body>
+</html>

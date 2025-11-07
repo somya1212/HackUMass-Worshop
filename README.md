@@ -1,6 +1,6 @@
 # HackUMass-Worshop
 Build and deploy your first project on the AWS Free Tier
-# Quote of the Day - Serverless on AWS (Free Tier)
+# Quote of the Day - on AWS (Free Tier)
 
 A minimal, beginner-friendly **serverless** app:
 - **DynamoDB** stores quotes
